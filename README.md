@@ -1,6 +1,6 @@
-# Input Validation Using BLoC
+# Input Validation Using BLoC Pattern
 
-Validating input fields using BLoC pattern using Single Global Instance.
+Validating input fields using BLoC pattern with Scoped Instance & RxDart.
 
 ## Getting Started
 

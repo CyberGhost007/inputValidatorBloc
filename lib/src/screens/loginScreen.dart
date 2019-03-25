@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_bloc/src/blocs/provider.dart';
 import '../blocs/bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -7,20 +8,22 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
+
     return Container(
       margin: EdgeInsets.all(20.0),
       child: Column(
         children: <Widget>[
-          emailField(),
-          passwordField(),
+          emailField(bloc),
+          passwordField(bloc),
           SizedBox(height: 16.0),
-          button(),
+          button(bloc),
         ],
       ),
     );
   }
 
-  Widget emailField() {
+  Widget emailField(Bloc bloc) {
     return StreamBuilder(
       stream: bloc.email,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -46,7 +49,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget passwordField() {
+  Widget passwordField(Bloc bloc) {
     return StreamBuilder(
       stream: bloc.password,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -68,12 +71,17 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget button() {
-    return RaisedButton(
-      onPressed: () {},
-      child: Text('Login'),
-      color: Colors.deepOrangeAccent[400],
-      textColor: Colors.white,
+  Widget button(Bloc bloc) {
+    return StreamBuilder(
+      stream: bloc.submitValid,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return RaisedButton(
+          onPressed: !snapshot.hasData ? null : bloc.submit,
+          child: Text('Login'),
+          color: Colors.deepOrangeAccent[400],
+          textColor: Colors.white,
+        );
+      },
     );
   }
 }
