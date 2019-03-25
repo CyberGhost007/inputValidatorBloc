@@ -1,6 +1,6 @@
-# login_bloc
+# Input Validation Using BLoC
 
-A new Flutter project.
+Validating input fields using BLoC pattern using Single Global Instance.
 
 ## Getting Started
 
